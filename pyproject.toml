@@ -1,0 +1,12 @@
+[project]
+name = "grocrey_backend"
+dynamic = ["version"]
+dependencies = [
+    "asgiref==3.12.1",
+    "Django==6.1.1",
+    "django-rest-framework==0.1.0",
+    "djangorestframework==3.18.1",
+    "sqlparse==0.6.0",
+    "tzdata==2026.4",
+]
+requires-python = ">=3.13.7"
