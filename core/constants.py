@@ -14,6 +14,22 @@ class CommonColumns:
     CREATED_AT = "created_at"
     UPDATED_AT = "updated_at"
 
+
+class UserColumns:
+    USERNAME = "username"
+    EMAIL = "email"
+    FIRST_NAME = "first_name"
+    LAST_NAME = "last_name"
+
+
+class RelationFields:
+    CATEGORY = "category"
+    CATEGORY_NAME = "category_name"
+    PRODUCT = "product"
+    ADDRESS = "address"
+    ITEMS = "items"
+
+
 class UserProfileColumns:
     PHONE_NUMBER = "phone_number"
     PROFILE_PICTURE_URL = "profile_picture_url"
@@ -29,6 +45,7 @@ class ProductColumns:
     NAME = "name"
     PRICE = "price"
     DESCRIPTION = "description"
+    ORIGINAL_PRICE = "original_price"
     UNIT_SIZE = "unit_size"
     RATING_SCORE = "rating_score"
     REVIEW_COUNT = "review_count"
