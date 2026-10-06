@@ -40,6 +40,10 @@ class UserRoles:
         (CUSTOMER, "Customer"),
     ]
 
+class ImageFolder:
+    USER_FOLDER = "users/"
+    CATEGORY_FOLDER = "categories/"
+    PRODUCT_FOLDER = "products/"
 
 class UserProfileColumns:
     ID = "id"
@@ -48,7 +52,7 @@ class UserProfileColumns:
     FIRST_NAME = "first_name"
     LAST_NAME = "last_name"
     PHONE_NUMBER = "phone_number"
-    PROFILE_PICTURE_URL = "profile_picture_url"
+    PROFILE_PICTURE = "profile_picture"
     ROLE = "role"
     LOYALTY_POINTS = "loyalty_points"
     MARKETING_OPT_IN = "marketing_opt_in"
@@ -58,7 +62,7 @@ class UserProfileColumns:
 
 class CategoryColumns:
     NAME = "name"
-    IMAGE_URL = "image_url"
+    IMAGE = "image"
 
 
 class ProductColumns:
@@ -70,7 +74,7 @@ class ProductColumns:
     UNIT_SIZE = "unit_size"
     RATING_SCORE = "rating_score"
     REVIEW_COUNT = "review_count"
-    IMAGE_URL = "image_url"
+    IMAGE = "image"
     IS_FLASH_DEAL = "is_flash_deal"
 
 

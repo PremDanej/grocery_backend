@@ -18,7 +18,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             UserColumns.FIRST_NAME,
             UserColumns.LAST_NAME,
             UserProfileColumns.PHONE_NUMBER,
-            UserProfileColumns.PROFILE_PICTURE_URL,
+            UserProfileColumns.PROFILE_PICTURE,
             UserProfileColumns.LOYALTY_POINTS,
             UserProfileColumns.MARKETING_OPT_IN,
             CommonColumns.CREATED_AT,

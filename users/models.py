@@ -2,7 +2,7 @@ import uuid
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from core.constants import CommonColumns, UserProfileColumns, DatabaseTables, UserRoles
+from core.constants import CommonColumns, UserProfileColumns, DatabaseTables, UserRoles, ImageFolder
 
 
 class UserProfileManager(BaseUserManager):
@@ -29,7 +29,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, blank=True, db_column=UserProfileColumns.FIRST_NAME)
     last_name = models.CharField(max_length=30, blank=True, db_column=UserProfileColumns.LAST_NAME)
     phone_number = models.CharField(max_length=15, unique=True, blank=False, null=False, db_column=UserProfileColumns.PHONE_NUMBER)
-    profile_picture_url = models.URLField(blank=True, null=True, db_column=UserProfileColumns.PROFILE_PICTURE_URL)
+    profile_picture = models.ImageField(upload_to = ImageFolder.USER_FOLDER, blank=True, null=True, db_column=UserProfileColumns.PROFILE_PICTURE)
     loyalty_points = models.PositiveIntegerField(default=0, db_column=UserProfileColumns.LOYALTY_POINTS)
     marketing_opt_in = models.BooleanField(default=False, db_column=UserProfileColumns.MARKETING_OPT_IN)
     role = models.CharField(max_length=20, choices=UserRoles.CHOICES, default=UserRoles.USER, db_column=UserProfileColumns.ROLE)

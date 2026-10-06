@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = [
             CommonColumns.ID,
             CategoryColumns.NAME,
-            CategoryColumns.IMAGE_URL
+            CategoryColumns.IMAGE
         ]
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -28,6 +28,6 @@ class ProductSerializer(serializers.ModelSerializer):
             ProductColumns.UNIT_SIZE,
             ProductColumns.RATING_SCORE,
             ProductColumns.REVIEW_COUNT,
-            ProductColumns.IMAGE_URL,
+            ProductColumns.IMAGE,
             ProductColumns.IS_FLASH_DEAL
         ]
