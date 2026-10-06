@@ -30,15 +30,36 @@ class RelationFields:
     ITEMS = "items"
 
 
+class UserRoles:
+    ADMIN = "ADMIN"
+    USER = "USER"
+    CUSTOMER = "CUSTOMER"
+    CHOICES = [
+        (ADMIN, "Admin"),
+        (USER, "User"),
+        (CUSTOMER, "Customer"),
+    ]
+
+
 class UserProfileColumns:
+    ID = "id"
+    EMAIL = "email"
+    USERNAME = "username"
+    FIRST_NAME = "first_name"
+    LAST_NAME = "last_name"
     PHONE_NUMBER = "phone_number"
     PROFILE_PICTURE_URL = "profile_picture_url"
+    ROLE = "role"
     LOYALTY_POINTS = "loyalty_points"
     MARKETING_OPT_IN = "marketing_opt_in"
+    IS_ACTIVE = "is_active"
+    IS_STAFF = "is_staff"
+
 
 class CategoryColumns:
     NAME = "name"
     IMAGE_URL = "image_url"
+
 
 class ProductColumns:
     CATEGORY_ID = "category_id"
@@ -52,14 +73,17 @@ class ProductColumns:
     IMAGE_URL = "image_url"
     IS_FLASH_DEAL = "is_flash_deal"
 
+
 class UserAddressColumns:
     LABEL = "label"
     FULL_ADDRESS = "full_address"
     IS_DEFAULT = "is_default"
 
+
 class CartItemColumns:
     PRODUCT_ID = "product_id"
     QUANTITY = "quantity"
+
 
 class OrderColumns:
     ADDRESS_ID = "address_id"
@@ -71,15 +95,17 @@ class OrderColumns:
     PAYMENT_METHOD = "payment_method"
     STATUS = "status"
 
+
 class OrderItemColumns:
     ORDER_ID = "order_id"
     PRODUCT_ID = "product_id"
     QUANTITY = "quantity"
     PRICE_LOCKED = "price_locked"
 
+
 class OrderChoices:
 
-    #Delivery Types
+    # Delivery Types
     DELIVERY_EXPRESS = "EXPRESS"
     DELIVERY_STANDARD = "STANDARD"
     DELIVERY_CHOICES = [
@@ -87,7 +113,7 @@ class OrderChoices:
         (DELIVERY_STANDARD, "Standard Delivery (1-2 days)"),
     ]
 
-    #Payment Methods
+    # Payment Methods
     PAYMENT_CASH = "CASH"
     PAYMENT_VISA = "VISA"
     PAYMENT_MASTERCARD = "MASTERCARD"
@@ -99,7 +125,7 @@ class OrderChoices:
         (PAYMENT_PAYPAL, "PayPal"),
     ]
 
-    #Order Statuses
+    # Order Statuses
     STATUS_PENDING = "PENDING"
     STATUS_PROCESSING = "PROCESSING"
     STATUS_SHIPPED = "SHIPPED"
