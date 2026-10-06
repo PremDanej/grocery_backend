@@ -1,7 +1,16 @@
+from typing import cast
+
 from rest_framework import serializers
 from core.constants import CommonColumns, UserAddressColumns, RelationFields, CartItemColumns, OrderColumns, OrderItemColumns
 from .models import UserAddress, CartItem, OrderItem, Order, Product
 from catalog.serializers import ProductSerializer
+
+
+
+class AdminOrderUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ["status"]
 
 class UserAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,18 +25,18 @@ class UserAddressSerializer(serializers.ModelSerializer):
             CommonColumns.ID
         ]
 
-        def create(self, validated_data):
-            user = self.context['request'].user
-            # If the new address is set as default, unset the previous default address
-            if validated_data.get(UserAddressColumns.IS_DEFAULT, False):
-                UserAddress.objects.filter(user=user, is_default=True).update(is_default=False)
-            return UserAddress.objects.create(user=user, **validated_data)
+    def create(self, validated_data):
+        user = self.context['request'].user
+        # If the new address is set as default, unset the previous default address
+        if validated_data.get(UserAddressColumns.IS_DEFAULT, False):
+            UserAddress.objects.filter(user=user, is_default=True).update(is_default=False)
+        return UserAddress.objects.create(user=user, **validated_data)
 
-        def update(self, instance, validated_data):
-            user = self.context['request'].user
-            if validated_data.get(UserAddressColumns.IS_DEFAULT, False):
-                UserAddress.objects.filter(user=user, is_default=True).exclude(id=instance.id).update(is_default=False)
-            return super().update(instance, validated_data)
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        if validated_data.get(UserAddressColumns.IS_DEFAULT, False):
+            UserAddress.objects.filter(user=user, is_default=True).exclude(id=instance.id).update(is_default=False)
+        return super().update(instance, validated_data)
 
 
 
@@ -81,8 +90,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     # items and addresses for read only
-    items = OrderItemSerializer(many=True, read_only=True)
-    address = UserAddressSerializer(read_only=True)
+    items = cast(type[serializers.BaseSerializer], OrderItemSerializer)(many=True, read_only=True)
+    address = cast(type[serializers.BaseSerializer], UserAddressSerializer)(read_only=True)
 
     # For write in mobile app, we will send address_id and items as list of product_id and quantity
     address_id = serializers.UUIDField(write_only=True)

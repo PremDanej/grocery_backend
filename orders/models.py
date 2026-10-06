@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 import uuid
+from django.conf import settings
 from django.contrib.auth.models import User
 from core.constants import CommonColumns, OrderColumns, DatabaseTables, UserAddressColumns, CartItemColumns, OrderChoices, OrderItemColumns
 from catalog.models import Product
@@ -9,7 +10,7 @@ from catalog.models import Product
 
 class UserAddress(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column=CommonColumns.ID)
-    user = models.ForeignKey(User, related_name='addresses', on_delete=models.CASCADE, db_column=CommonColumns.USER_ID)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='addresses', on_delete=models.CASCADE)
     label = models.CharField(max_length=50, db_column=UserAddressColumns.LABEL)
     full_address = models.TextField(db_column=UserAddressColumns.FULL_ADDRESS)
     is_default = models.BooleanField(default=False, db_column=UserAddressColumns.IS_DEFAULT)
@@ -19,7 +20,7 @@ class UserAddress(models.Model):
 
 class CartItem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column=CommonColumns.ID)
-    user = models.ForeignKey(User, related_name='cart_items', on_delete=models.CASCADE, db_column=CommonColumns.USER_ID)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cart_items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, db_column=CartItemColumns.PRODUCT_ID)
     quantity = models.PositiveIntegerField(default=1, db_column=CartItemColumns.QUANTITY)
 
@@ -28,7 +29,7 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column=CommonColumns.ID)
-    user = models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE, db_column=CommonColumns.USER_ID)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='orders', on_delete=models.CASCADE)
     address = models.ForeignKey(UserAddress, on_delete=models.SET_NULL, null=True, db_column=OrderColumns.ADDRESS_ID)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, db_column=OrderColumns.SUBTOTAL)
     delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, db_column=OrderColumns.DELIVERY_FEE)
