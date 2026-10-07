@@ -15,7 +15,7 @@ db.sqlite3
 /staticfiles/
 
 # Environment files
-.env
+.idea/*
 .env.*
 
 # Coverage/test artifacts
@@ -27,3 +27,4 @@ htmlcov/
 # Migrations (keep __init__.py)
 */migrations/*.py
 !*/migrations/__init__.py
+initialize.md
